@@ -6,6 +6,19 @@ botonEnviar.addEventListener("click", (event)=>{
     if(inpNombre.value.trim() == "" || inpEmail.value.trim() == "" ){
         alert("Error");
     }else{
-        alert("Exito");
+        const eventForm = new CustomEvent("formularioEnviado", {
+            detail:{
+                nombre: inpNombre.value,
+                correo: inpEmail.value,
+            }
+        });
+        document.dispatchEvent(eventForm);
+
     }
 })
+document.addEventListener("formularioEnviado", (e) => {
+    console.log("Evento personalizado 'formularioEnviado' detectado:");
+    console.log("Nombre:", e.detail.nombre);
+    console.log("Correo:", e.detail.correo);
+});
+
